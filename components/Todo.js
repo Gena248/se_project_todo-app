@@ -1,13 +1,28 @@
 export class Todo {
-  constructor(data, selector) {
+  constructor(data, selector, handleCheck, handleDelete) {
     this._data = data;
     this._templateElement = document.querySelector(selector);
+    this._handleCheck = handleCheck;
+    this._handleDelete = handleDelete;
   }
 
   _setEventListeners(todoElement) {
+    const checkboxEl = todoElement.querySelector(".todo__completed");
     const deleteBtn = todoElement.querySelector(".todo__delete-btn");
+
     deleteBtn.addEventListener("click", () => {
+      const isChecked = checkboxEl.checked;
+
+      if (typeof this._handleDelete === "function") {
+        this._handleDelete({ ...this._data, completed: isChecked });
+      }
+
       todoElement.remove();
+    });
+
+    checkboxEl.addEventListener("change", () => {
+      const isChecked = checkboxEl.checked;
+      this._handleCheck(isChecked);
     });
   }
 
