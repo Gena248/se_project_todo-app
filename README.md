@@ -14,4 +14,4 @@ I used vanilla JavaScript with an object-oriented programming approach, organizi
 
 This project is deployed on GitHub Pages:
 
-- (https://github.com/Gena248/se_project_todo-app)
+- (https://gena248.github.io/se_project_todo-app/)
