@@ -4,6 +4,7 @@ export class Todo {
     this._templateElement = document.querySelector(selector);
     this._handleCheck = handleCheck;
     this._handleDelete = handleDelete;
+    this._todoElement = null;
   }
 
   _setEventListeners(todoElement) {
@@ -27,14 +28,14 @@ export class Todo {
   }
 
   getView() {
-    const todoElement = this._templateElement.content
+    this._todoElement = this._templateElement.content
       .querySelector(".todo")
       .cloneNode(true);
 
-    const todoNameEl = todoElement.querySelector(".todo__name");
-    const todoCheckboxEl = todoElement.querySelector(".todo__completed");
-    const todoLabel = todoElement.querySelector(".todo__label");
-    const todoDate = todoElement.querySelector(".todo__date");
+    const todoNameEl = this._todoElement.querySelector(".todo__name");
+    const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
+    const todoLabel = this._todoElement.querySelector(".todo__label");
+    const todoDate = this._todoElement.querySelector(".todo__date");
 
     todoNameEl.textContent = this._data.name;
     todoCheckboxEl.checked = this._data.completed;
@@ -51,7 +52,7 @@ export class Todo {
       })}`;
     }
 
-    this._setEventListeners(todoElement);
-    return todoElement;
+    this._setEventListeners(this._todoElement);
+    return this._todoElement;
   }
 }
